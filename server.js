@@ -23,20 +23,32 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://movie-webapp-production.up.railway.app",
+];
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://movie-webapp-production.up.railway.app"
-    ],
+    origin: (origin, callback) => {
+      // allow requests with no origin (Postman, mobile apps, server-to-server)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error("Not allowed by CORS"));
+    },
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   })
 );
 
-// IMPORTANT
+// handle preflight
 app.options("*", cors());
+
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
