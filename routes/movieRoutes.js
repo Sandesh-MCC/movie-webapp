@@ -2,6 +2,7 @@ import express from "express";
 import {
   getMovies,
   searchMovies,
+  getMovieById,
   sortMovies,
   addMovie,
   updateMovie,
@@ -18,6 +19,7 @@ const router = express.Router();
 // @access  Public
 router.get("/", getMovies);
 
+router.get("/:id", getMovieById);
 // @route   GET /api/movies/search?q=keyword
 // @desc    Search movies by title or description
 // @access  Public
