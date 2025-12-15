@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // change if needed
+    origin: "https://movie-webapp-production.up.railway.app", // change if needed
     credentials: true,
   })
 );
