@@ -84,14 +84,33 @@ export const sortMovies = async (req, res) => {
  */
 export const addMovie = async (req, res) => {
   try {
-    await movieQueue.add(req.body);
+    const movieData = req.body;
+
+    // Prevent duplicate movies (title + releaseDate)
+    const exists = await Movie.findOne({
+      title: movieData.title,
+      releaseDate: movieData.releaseDate,
+    });
+
+    if (exists) {
+      return res.status(409).json({
+        success: false,
+        message: "Movie already exists",
+      });
+    }
+
+    const movie = await Movie.create(movieData);
 
     res.status(201).json({
       success: true,
-      message: "Movie added to queue for processing",
+      message: "Movie added successfully",
+      movie,
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 

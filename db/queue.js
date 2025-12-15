@@ -3,7 +3,7 @@ import Movie from "../models/Movie.js";
 
 // Redis connection
 const redisConfig = {
-  host: process.env.REDIS_HOST || "127.0.0.1",
+  host: process.env.REDIS_URL || "127.0.0.1",
   port: process.env.REDIS_PORT || 6379,
 };
 
