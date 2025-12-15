@@ -25,18 +25,21 @@ app.use(express.urlencoded({ extended: true }));
 
 
 
-// 🚨 CORS FIRST — before routes
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://movie-webapp-production.up.railway.app",
+  "https://movie-webapp-frontend.vercel.app",
 ];
 
 app.use(
   cors({
     origin: (origin, callback) => {
       if (!origin) return callback(null, true);
-      if (allowedOrigins.includes(origin)) return callback(null, true);
-      return callback(null, false);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error("Not allowed by CORS"));
     },
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -44,7 +47,7 @@ app.use(
   })
 );
 
-// Express v5 compatible
+// Express v5 safe
 app.options(/.*/, cors());
 
 
