@@ -19,7 +19,7 @@ const router = express.Router();
 // @access  Public
 router.get("/", getMovies);
 
-router.get("/:id", getMovieById);
+
 // @route   GET /api/movies/search?q=keyword
 // @desc    Search movies by title or description
 // @access  Public
@@ -30,6 +30,7 @@ router.get("/search", searchMovies);
 // @access  Public
 router.get("/sorted", sortMovies);
 
+router.get("/:id", getMovieById);
 // @route   POST /api/movies
 // @desc    Add new movie (Admin only)
 // @access  Admin
