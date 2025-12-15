@@ -37,7 +37,7 @@ if (process.env.NODE_ENV === "development") {
 
 
 app.get("/", (req, res) => {
-  res.send(" MERN Movie API is running...");
+  res.send("Movie API is running...");
 });
 
 app.use("/api/auth", authRoutes);
