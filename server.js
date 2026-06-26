@@ -26,8 +26,8 @@ app.use(express.urlencoded({ extended: true }));
 
 
 const allowedOrigins = [
-  "http://localhost:5173",
-  "https://movie-webapp-frontend.vercel.app",
+  "https://movie-webapp-frontend-irsu.onrender.com/",
+  "https://movie-webapp-backend-ties.onrender.com",
 ];
 
 app.use(
