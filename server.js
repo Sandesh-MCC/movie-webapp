@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 const allowedOrigins = [
-  "https://movie-webapp-frontend-irsu.onrender.com/",
+  "https://movie-webapp-frontend-irsu.onrender.com",
   "https://movie-webapp-backend-ties.onrender.com",
 ];
 
